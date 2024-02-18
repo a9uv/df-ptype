@@ -5,7 +5,7 @@ import { lusitana } from './ui/fonts';
 import { ArrowRightIcon } from '@heroicons/react/24/outline';
 import { useAuth } from "@clerk/nextjs";
 
-import { api } from "~/utils/api";
+// import { api } from "~/utils/api";
 
 
 

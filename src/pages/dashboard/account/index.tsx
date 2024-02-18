@@ -2,7 +2,7 @@
 import Link from "next/link";
 import Head from "next/head";
 import Layout from "../../../components/layout"
-
+import { lusitana } from '../../ui/fonts';
 const accTokenMemory = null;
 const integrationKey = process.env.NEXT_PUBLIC_DOCUSIGN_INTEGRATION_KEY;
 // const envSecretKey = process.env.DOCUSIGN_SECRET_KEY
@@ -26,7 +26,10 @@ return (
     <link rel="icon" href="/favicon.ico" />
         </Head>
         <Layout>  
-<div className="container mx-auto p-4">
+            <div className="container mx-auto p-4">
+                            {/* <h1 className={`${lusitana.className} mb-4 text-xl md:text-2xl`}>
+        Account
+      </h1> */}
     <div className="mb-8">
     <h2 className="text-2xl font-bold mb-4">General</h2>
     <div className="grid grid-cols-2 gap-4">
