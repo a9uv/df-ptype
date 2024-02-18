@@ -1,17 +1,16 @@
 import Head from "next/head";
 import Link from "next/link";
 import Image from 'next/image';
-import logoIpsum from '../../public/logoipsum.svg'
 import { lusitana } from './ui/fonts';
 import { ArrowRightIcon } from '@heroicons/react/24/outline';
-import { SignInButton, useAuth } from "@clerk/nextjs";
+import { useAuth } from "@clerk/nextjs";
 
 import { api } from "~/utils/api";
 
 
 
 export default function Home() {
-  const hello = api.post.hello.useQuery({ text: "from tRPC" });
+  // const hello = api.post.hello.useQuery({ text: "from tRPC" });
   const user = useAuth()
 
   return (
@@ -31,7 +30,7 @@ export default function Home() {
       <div className="mt-4 flex grow flex-col gap-4 md:flex-row">
         <div className="flex flex-col justify-center gap-6 rounded-lg bg-gray-50 px-6 py-10 md:w-2/5 md:px-20">
           <Image
-            src={logoIpsum}
+            src='../../public/logoipsum.svg'
             alt="DealFlow Logo"
             height={80}
             width={80}

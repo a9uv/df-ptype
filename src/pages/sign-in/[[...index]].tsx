@@ -1,4 +1,4 @@
-import { SignIn, SignInButton } from "@clerk/nextjs";
+import { SignIn } from "@clerk/nextjs";
  import { lusitana } from '../ui/fonts';
 
 export default function SignInPage() {

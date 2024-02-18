@@ -11,7 +11,7 @@ import {
 
 } from '@heroicons/react/24/outline';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+// import { usePathname } from 'next/navigation';
 
 
 // Map of links to display in the side navigation.
@@ -24,11 +24,11 @@ const links = [
   { name: 'Quotes', href: '/dashboard/quotes', icon: PencilIcon },
   {name: 'Forms', href: '/dashboard/forms', icon: DocumentDuplicateIcon},
   { name: 'Account', href: '/dashboard/account', icon: UserCircleIcon },
-  // { name: 'Support', href: '/dashboard/support', icon: QuestionMarkCircleIcon },
+  { name: 'Support', href: '/dashboard/support', icon: QuestionMarkCircleIcon },
 ];
 
 export default function NavLinks() {
-  const pathname = usePathname();
+  // const pathname = usePathname();
   return (
     <>
       {links.map((link) => {

@@ -1,11 +1,11 @@
 import Head from "next/head";
-import Link from "next/link";
-import Image from 'next/image';
+// import Link from "next/link";
+// import Image from 'next/image';
 // import logoIpsum from '../../public/logoipsum.svg'
 // import { lusitana } from '../ui/fonts';
-import { ArrowRightIcon } from '@heroicons/react/24/outline';
-import { SignInButton, useAuth } from "@clerk/nextjs";
-import { Suspense } from "react";
+// import { ArrowRightIcon } from '@heroicons/react/24/outline';
+import {  useAuth } from "@clerk/nextjs";
+// import { Suspense } from "react";
 import { api } from "~/utils/api";
 import Layout from "../../components/layout";
 import { lusitana } from "../ui/fonts";

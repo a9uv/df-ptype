@@ -5,7 +5,7 @@ import Layout from "../../../components/layout"
 
 const accTokenMemory = null;
 const integrationKey = process.env.NEXT_PUBLIC_DOCUSIGN_INTEGRATION_KEY;
-const envSecretKey = process.env.DOCUSIGN_SECRET_KEY
+// const envSecretKey = process.env.DOCUSIGN_SECRET_KEY
 const redirectUri = 'http://localhost:3000/dashboard/quotes';
 const scope = 'signature';
 const docuLoginURI = `https://account-d.docusign.com/oauth/auth?response_type=code&scope=${scope}&client_id=${integrationKey}&redirect_uri=${redirectUri}`;
