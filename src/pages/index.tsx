@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { lusitana } from '../components/fonts';
 import { ArrowRightIcon } from '@heroicons/react/24/outline';
 import { useAuth } from "@clerk/nextjs";
-
+import logoIpsum from '../../public/logoipsum.svg'
 // import { api } from "~/utils/api";
 
 
@@ -30,7 +30,7 @@ export default function Home() {
       <div className="mt-4 flex grow flex-col gap-4 md:flex-row">
         <div className="flex flex-col justify-center gap-6 rounded-lg bg-gray-50 px-6 py-10 md:w-2/5 md:px-20">
           <Image
-            src='../../public/logoipsum.svg'
+            src={logoIpsum}
             alt="DealFlow Logo"
             height={80}
             width={80}
