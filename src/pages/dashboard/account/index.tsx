@@ -2,16 +2,35 @@
 import Link from "next/link";
 import Head from "next/head";
 import Layout from "../../../components/layout"
-import { lusitana } from '../../../components/fonts';
+import {useRouter} from 'next/router'
+
+
 const accTokenMemory = null;
 const integrationKey = process.env.NEXT_PUBLIC_DOCUSIGN_INTEGRATION_KEY;
-// const envSecretKey = process.env.DOCUSIGN_SECRET_KEY
-const redirectUri = 'http://localhost:3000/dashboard/quotes';
+const envSecretKey = process.env.DOCUSIGN_SECRET_KEY
+const redirectUri = 'http://localhost:3000/dashboard/account';
 const scope = 'signature';
 const docuLoginURI = `https://account-d.docusign.com/oauth/auth?response_type=code&scope=${scope}&client_id=${integrationKey}&redirect_uri=${redirectUri}`;
 
 export default function Account() {
 
+    const router = useRouter();
+//     const code = router.query.code;
+//       const tokenURI = 'https://account-d.docusign.com/oauth/token';
+//   const credentials = btoa(`${integrationKey}:${envSecretKey}`);
+    
+    // if (code !== undefined) {
+     
+    //     try {
+            
+    //         const fetchURL = "http://localhost:3000/api/a-token"
+    //         const reqBody = { code, credentials, tokenURI }
+    //     } catch (error) {
+    //         console.error('Error for a-token')
+    //         }
+    //     }
+
+    // }
 
 
 //   console.log('ENTER - dashboard/account\n\n accToken from Server Memory: ', accTokenMemory);
@@ -27,9 +46,6 @@ return (
         </Head>
         <Layout>  
             <div className="container mx-auto p-4">
-                            {/* <h1 className={`${lusitana.className} mb-4 text-xl md:text-2xl`}>
-        Account
-      </h1> */}
     <div className="mb-8">
     <h2 className="text-2xl font-bold mb-4">General</h2>
     <div className="grid grid-cols-2 gap-4">
