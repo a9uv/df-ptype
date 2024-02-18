@@ -1,5 +1,5 @@
 import { SignUp } from "@clerk/nextjs";
- import { lusitana } from '../ui/fonts';
+ import { lusitana } from '../../components/fonts';
 
 export default function SignUpPage() {
 

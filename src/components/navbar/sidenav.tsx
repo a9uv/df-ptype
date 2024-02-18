@@ -2,7 +2,7 @@ import Link from 'next/link';
 import NavLinks from './nav-links';
 // import AcmeLogo from '@/app/ui/acme-logo';
 import { PowerIcon } from '@heroicons/react/24/outline';
-import { lusitana } from '../../pages/ui/fonts'
+import { lusitana } from '../fonts'
 // import { signOut } from '@/auth';
 
 export default function SideNav() {

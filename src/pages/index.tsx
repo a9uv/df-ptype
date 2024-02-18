@@ -1,7 +1,7 @@
 import Head from "next/head";
 import Link from "next/link";
 import Image from 'next/image';
-import { lusitana } from './ui/fonts';
+import { lusitana } from '../components/fonts';
 import { ArrowRightIcon } from '@heroicons/react/24/outline';
 import { useAuth } from "@clerk/nextjs";
 

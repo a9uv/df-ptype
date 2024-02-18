@@ -8,7 +8,7 @@ import Head from "next/head";
 // import { Suspense } from "react";
 // import { api } from "~/utils/api";
 import Layout from "../../../components/layout";
-import { lusitana } from "../../ui/fonts";
+import { lusitana } from "../../../components/fonts";
 
 
 

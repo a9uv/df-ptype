@@ -2,7 +2,7 @@
 import Link from "next/link";
 import Head from "next/head";
 import Layout from "../../../components/layout"
-import { lusitana } from '../../ui/fonts';
+import { lusitana } from '../../../components/fonts';
 const accTokenMemory = null;
 const integrationKey = process.env.NEXT_PUBLIC_DOCUSIGN_INTEGRATION_KEY;
 // const envSecretKey = process.env.DOCUSIGN_SECRET_KEY
