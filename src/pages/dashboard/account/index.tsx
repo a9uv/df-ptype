@@ -2,35 +2,51 @@
 import Link from "next/link";
 import Head from "next/head";
 import Layout from "../../../components/layout"
-import {useRouter} from 'next/router'
+import { useParams } from 'next/navigation'
+import { getAccessToken } from "~/lib/docusign";
 
 
-const accTokenMemory = null;
+
+let accTokenMemory: string;
+let baseURI: string;
+let accountId:string;
 const integrationKey = process.env.NEXT_PUBLIC_DOCUSIGN_INTEGRATION_KEY;
 const envSecretKey = process.env.DOCUSIGN_SECRET_KEY
-const redirectUri = 'http://localhost:3000/dashboard/account';
+const redirectUri = 'http://localhost:3000/dashboard/account/doc';
 const scope = 'signature';
 const docuLoginURI = `https://account-d.docusign.com/oauth/auth?response_type=code&scope=${scope}&client_id=${integrationKey}&redirect_uri=${redirectUri}`;
 
-export default function Account() {
 
-    const router = useRouter();
-//     const code = router.query.code;
-//       const tokenURI = 'https://account-d.docusign.com/oauth/token';
-//   const credentials = btoa(`${integrationKey}:${envSecretKey}`);
+
+
+
+export default function Account(props: any) {
+
     
-    // if (code !== undefined) {
+    // const code = router.asPath
+    const code='undefined'
+    
+    const tokenURI = 'https://account-d.docusign.com/oauth/token';
+    const credentials = btoa(`${integrationKey}:${envSecretKey}`);
+    console.log("docuSign Param Code: ", code);
+    console.log('accTokenMemory: ', accTokenMemory);
+    if (code !== undefined) {
      
-    //     try {
-            
-    //         const fetchURL = "http://localhost:3000/api/a-token"
-    //         const reqBody = { code, credentials, tokenURI }
-    //     } catch (error) {
-    //         console.error('Error for a-token')
-    //         }
-    //     }
+        // try {
+        //     const fetchURL = "http://localhost:3000/api/a-token"
+        //     const reqBody = { code, credentials, tokenURI }
 
-    // }
+                
+
+        //     console.log('\n accessJson.accessToken:', accessJSON.accessToken);
+        //     accTokenMemory = accessJSON.accessToken
+        //     accountId = '34b4257c-670b-4966-9310-24ccc31f0dae'
+        //     baseURI = 'https://demo.docusign.net/'
+
+        //     } catch (error) {
+        //         console.error('Error for a-token')
+        //     }
+    } 
 
 
 //   console.log('ENTER - dashboard/account\n\n accToken from Server Memory: ', accTokenMemory);
@@ -81,7 +97,7 @@ return (
     <div>
     <h2 className="text-2xl font-bold mb-4">DocuSign</h2>
     <div>
-        {accTokenMemory !== null ?
+        {accTokenMemory !== undefined ?
         (<p> You are logged in to DocuSign! </p>)
         : (
             <div>

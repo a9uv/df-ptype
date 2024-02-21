@@ -1,3 +1,6 @@
+
+let docuAccessToken = null;
+
 export default function Docu() {
     return (
         <>
