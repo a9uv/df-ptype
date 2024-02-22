@@ -17,34 +17,44 @@ const docuAPIEndpoint = "https://account-d.docusign.com/oauth/userinfo"
 
 
 
+
+
     
 
 
 const authTokenFetch = async () => {
     console.log('entering authTokenFetch() . . . \n\n');
+
     
+    const authTokenURL = `http://localhost:3000/api/auth/accessToken?code=${globalDocuCode}`
     const reqBody = { globalDocuCode, credentials, tokenURI }
+    console.log('authTokenFetch reqBody: \n', JSON.stringify(reqBody));
+
+
+    const res = await axios.get(authTokenURL)
+    console.log('authTokenFetch()  res.status: ', res.status);
+    
+    
+        //     const res = await axios.post(authTokenURL, JSON.stringify(reqBody), {
+        //     headers: {
+        //         "Content-Type": "application/json"
+        //     }
+        // }).catch(err => {
+        //     console.log('authTokenFetch()  error message: \n\n ', err.message);
+        // })
     
 
-    try {
-        const res = await axios.post(tokenURI, JSON.stringify(reqBody), {
-            headers: {
-                Authorization: `Basic ${credentials}`
-            }
-        })
-    
 
-        if (!res.data) {
-            throw new Error('No data returned from DocuSign');
-        }
+        // console.log('authTokenFetch(): OK: ', res.status, 'Status Text: ', res.statusText);
         
-        console.log('authTokenFetch(): OK: ', res.status, 'Status Text: ', res.statusText);
+        // const data = await res.data.json()
+
+
+        // globalAccessToken = data.access_token;
+        // console.log('globalAccessToken in authTokenFetch() post axios.post(): ', globalAccessToken);
         
-        return res.data
-    } catch (error) {
-        console.error('authTokenFetch(): Error:', error);
-        throw error; // Re-throw for error handling in caller
-    }
+
+
 
 }
 
@@ -55,20 +65,25 @@ const getBaseUri = async () => {
         headers: {
             Authorization: `Bearer ${globalAccessToken}`
         }
-    }).then((res) => {
-        const data = res.data.json()
-        globalAccountID = data.accounts[0].account_id;
-        globalBaseURI = data.accounts[0].base_uri;
-        globalUserInfo = [data.given_name, data.email, data.accounts[0].account_name]
-        console.log(`globalAccountID: ${globalAccountID} \n globalBaseURI: ${globalBaseURI} \n 
-        globalUserInfo - Name: ${globalUserInfo[0]} \n
-        globalUserInfo - Email: $ ${globalUserInfo[1]} \n
-        globalUserInfo - Account Name: ${globalUserInfo[2]} \n `);
-
-        return res.data
-    }).catch((err) => {
-        console.log('getBaseUri(): Error:', err);
     })
+    
+
+    
+    console.log('getBaseUri(): OK: ', res.status, 'Status Text: ', res.statusText);
+
+    const data = await res.data.json()
+
+    globalAccountID = data.accounts[0].account_id;
+    globalBaseURI = data.accounts[0].base_uri;
+    globalUserInfo = [data.given_name, data.email, data.accounts[0].account_name]
+    console.log(`globalAccountID: ${globalAccountID} \n globalBaseURI: ${globalBaseURI} \n 
+    globalUserInfo - Name: ${globalUserInfo[0]} \n
+    globalUserInfo - Email: $ ${globalUserInfo[1]} \n
+    globalUserInfo - Account Name: ${globalUserInfo[2]} \n `);
+
+        // return res.data
+    
+
 
  
 }
@@ -81,36 +96,34 @@ export default function Doc() {
     const router = useRouter()
     const { code } = router.query
     globalDocuCode = code as string;
-    console.log('globalDocuCode: \n ', globalDocuCode);
+    if (globalDocuCode !== undefined) {
+        authTokenFetch()
 
-
-    //STEP 2: OAuth Process - API Call to get Access Token from DocuSign
-    if (globalDocuCode !== undefined && globalAccessToken == null) {
         
-        authTokenFetch().then((data) => {
-            globalAccessToken = data.access_token;
-            console.log('globalAccessToken: \n ', globalAccessToken);       
-        }).catch((error) => {
-            console.error('error: ', error);
-        })
-
     }
-
-    //STEP 3: API Call to get AccountID & Base URI from DocuSign
-    if (globalAccessToken !== undefined && globalAccountID == null && globalBaseURI == null) {
-       getBaseUri().then((data) => {
-            console.log('getBaseUri(): data: ', data);
-        }).catch((error) => {
-            console.error('error: ', error);
-        })
-    }
+    
+    // console.log('globalDocuCode: \n ', globalDocuCode);
 
 
-    if (globalAccessToken !== undefined && globalAccountID !== undefined && globalBaseURI !== undefined) {
-        console.log('all items received and set, return to account \n_____________________ \n\n');
+    // // STEP 2: OAuth Process - API Call to get Access Token from DocuSign
+    // if (globalDocuCode !== undefined && globalAccessToken == undefined) {
+    //     console.log();
         
-        router.push('/dashboard/account')
-    }
+    //     authTokenFetch()
+
+    // }
+
+    // // //STEP 3: API Call to get AccountID & Base URI from DocuSign
+    // if (globalAccessToken !== undefined && globalAccountID == undefined && globalBaseURI == undefined) {
+    //    getBaseUri()
+    // }
+
+
+    // if (globalAccessToken !== undefined && globalAccountID !== undefined && globalBaseURI !== undefined) {
+    //     console.log('all items received and set, return to account \n_____________________ \n\n');
+        
+    //     router.push('/dashboard/account')
+    // }
     
 
     
@@ -127,3 +140,35 @@ export default function Doc() {
     )
 
 }
+
+
+// export async function getServerSideProps() {
+//     console.log('entering getServerSideProps() in doc.tsx. . . \n\n');
+//     console.log('globalDocuCode in ServerSideProps: \n ', globalDocuCode);
+    
+    
+//     if (globalDocuCode !== undefined && globalAccessToken == undefined) {
+//         const reqBody = { globalDocuCode, credentials, tokenURI }
+//         console.log('authTokenFetch reqBody: \n', JSON.stringify(reqBody));
+
+//             const res = await axios.post(tokenURI, JSON.stringify(reqBody), {
+//             headers: {
+//                 Authorization: `Basic ${credentials}`
+//             }
+//             }).then(res => {
+//                 console.log('authTokenFetch(): OK: ', res.status, 'Status Text: ', res.statusText);
+//                 const data = res.data
+//                 globalAccessToken = data.access_token;
+//                 console.log('globalAccessToken in authTokenFetch() post axios.post(): ', globalAccessToken);
+//             }).catch(err => {
+//                 console.log('authTokenFetch()  error message: \n\n ', err.message);
+//             })
+        
+//     }
+//     return {
+//         props: {
+//             hello: 'world'
+//         }
+//     }
+    
+// }

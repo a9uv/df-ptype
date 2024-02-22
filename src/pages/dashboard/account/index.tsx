@@ -4,6 +4,7 @@ import Head from "next/head";
 import Layout from "../../../components/layout"
 import { useParams } from 'next/navigation'
 import { getAccessToken } from "~/lib/docusign";
+import { globalAccessToken,globalAccountID, globalBaseURI, globalDocuCode, globalUserInfo } from "./doc";
 
 
 
